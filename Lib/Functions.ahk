@@ -212,9 +212,6 @@ SaveUINavSettings(*) {
 }
 
 ;Opens discord Link
-OpenDiscordLink() {
-    Run("https://discord.gg/mistdomain")
- }
  
  ;Minimizes the UI
  minimizeUI(*){

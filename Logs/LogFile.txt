@@ -1502,3 +1502,181 @@ Configuration settings loaded successfully 00:00
 ==Mist AA v0.3 - BK MOD==
   Start Time: [16h.02m.05s]
 Configuration settings loaded successfully 00:00
+
+==Mist AA v0.3 - BK MOD==
+  Start Time: [16h.32m.13s]
+
+==Mist AA v0.3 - BK MOD==
+  Start Time: [16h.32m.45s]
+
+==Mist AA v0.3 - BK MOD==
+  Start Time: [16h.33m.11s]
+
+==Mist AA v0.3 - BK MOD==
+  Start Time: [16h.33m.26s]
+
+==Mist AA v0.3 - BK MOD==
+  Start Time: [16h.33m.57s]
+
+==Mist AA v0.3 - BK MOD==
+  Start Time: [16h.34m.29s]
+
+==Mist AA v0.3 - BK MOD==
+  Start Time: [16h.36m.14s]
+Attempting to locate the Roblox window 00:30
+Attempting to locate the Roblox window 00:36
+Attempting to locate the Roblox window 00:41
+Attempting to locate the Roblox window 00:46
+Attempting to locate the Roblox window 00:52
+Attempting to locate the Roblox window 00:57
+Attempting to locate the Roblox window 01:02
+Attempting to locate the Roblox window 01:08
+Could not find Roblox window 01:08
+
+==Mist AA v0.3 - BK MOD==
+  Start Time: [16h.37m.36s]
+Attempting to locate the Roblox window 00:30
+Attempting to locate the Roblox window 00:35
+Attempting to locate the Roblox window 00:41
+Attempting to locate the Roblox window 00:46
+Attempting to locate the Roblox window 00:51
+
+==Mist AA v0.3 - BK MOD==
+  Start Time: [16h.38m.29s]
+
+==Mist AA v0.3 - BK MOD==
+  Start Time: [16h.38m.50s]
+
+==Mist AA v0.3 - BK MOD==
+  Start Time: [16h.38m.53s]
+
+==Mist AA v0.3 - BK MOD==
+  Start Time: [16h.39m.21s]
+
+==Mist AA v0.3 - BK MOD==
+  Start Time: [16h.39m.33s]
+Attempting to locate the Roblox window 00:30
+Attempting to locate the Roblox window 00:35
+Attempting to locate the Roblox window 00:41
+Attempting to locate the Roblox window 00:46
+Attempting to locate the Roblox window 00:51
+Attempting to locate the Roblox window 00:56
+Attempting to locate the Roblox window 01:02
+Attempting to locate the Roblox window 01:07
+Could not find Roblox window 01:07
+
+==Mist AA v0.3 - BK MOD==
+  Start Time: [16h.43m.55s]
+Attempting to locate the Roblox window 00:30
+Attempting to locate the Roblox window 00:35
+Attempting to locate the Roblox window 00:40
+Attempting to locate the Roblox window 00:46
+Attempting to locate the Roblox window 00:51
+Attempting to locate the Roblox window 00:56
+Attempting to locate the Roblox window 01:02
+Attempting to locate the Roblox window 01:07
+Could not find Roblox window 01:08
+
+==Mist AA v0.3 - BK MOD==
+  Start Time: [17h.13m.29s]
+
+==Mist AA v0.3 - BK MOD==
+  Start Time: [17h.40m.42s]
+
+==Mist AA v0.3 - BK MOD==
+  Start Time: [17h.44m.00s]
+Attempting to locate the Roblox window 00:30
+Attempting to locate the Roblox window 00:35
+Attempting to locate the Roblox window 00:40
+Attempting to locate the Roblox window 00:46
+Attempting to locate the Roblox window 00:51
+Attempting to locate the Roblox window 00:56
+Attempting to locate the Roblox window 01:02
+Attempting to locate the Roblox window 01:07
+Could not find Roblox window 01:07
+
+==Mist AA v0.3 - BK MOD==
+  Start Time: [17h.46m.42s]
+Attempting to locate the Roblox window 00:30
+Attempting to locate the Roblox window 00:35
+Attempting to locate the Roblox window 00:41
+
+==Mist AA v0.3 - BK MOD==
+  Start Time: [17h.47m.29s]
+
+==Mist AA v0.3 - BK MOD==
+  Start Time: [17h.47m.37s]
+
+==Mist AA v0.3 - BK MOD==
+  Start Time: [17h.47m.54s]
+
+==Mist AA v0.3 - BK MOD==
+  Start Time: [17h.48m.12s]
+
+==Mist AA v0.3 - BK MOD==
+  Start Time: [17h.48m.26s]
+Attempting to locate the Roblox window 00:30
+Attempting to locate the Roblox window 00:35
+Attempting to locate the Roblox window 00:40
+Attempting to locate the Roblox window 00:46
+Attempting to locate the Roblox window 00:51
+Attempting to locate the Roblox window 00:56
+Attempting to locate the Roblox window 01:02
+Attempting to locate the Roblox window 01:07
+Could not find Roblox window 01:07
+
+==Mist AA v0.3 - BK MOD==
+  Start Time: [17h.49m.44s]
+Attempting to locate the Roblox window 00:30
+Attempting to locate the Roblox window 00:35
+Attempting to locate the Roblox window 00:41
+Attempting to locate the Roblox window 00:46
+Attempting to locate the Roblox window 00:51
+Attempting to locate the Roblox window 00:57
+
+==Mist AA v0.3 - BK MOD==
+  Start Time: [17h.50m.42s]
+
+==Mist AA v0.3 - BK MOD==
+  Start Time: [17h.51m.03s]
+
+==Mist AA v0.3 - BK MOD==
+  Start Time: [17h.51m.17s]
+
+==Mist AA v0.3 - BK MOD==
+  Start Time: [17h.53m.33s]
+
+==Mist AA v0.3 - BK MOD==
+  Start Time: [17h.56m.55s]
+
+==Mist AA v0.3 - BK MOD==
+  Start Time: [17h.57m.16s]
+Attempting to locate the Roblox window 00:30
+
+==Mist AA v0.3 - BK MOD==
+  Start Time: [17h.57m.48s]
+Attempting to locate the Roblox window 00:30
+
+==Mist AA v0.3 - BK MOD==
+  Start Time: [17h.58m.22s]
+
+==Mist AA v0.3 - BK MOD==
+  Start Time: [17h.58m.42s]
+
+==Mist AA v0.3 - BK MOD==
+  Start Time: [18h.00m.05s]
+
+==Mist AA v0.3 - BK MOD==
+  Start Time: [18h.00m.14s]
+
+==Mist AA v0.3 - BK MOD==
+  Start Time: [18h.00m.19s]
+Attempting to locate the Roblox window 00:30
+Attempting to locate the Roblox window 00:35
+Attempting to locate the Roblox window 00:40
+Attempting to locate the Roblox window 00:46
+Attempting to locate the Roblox window 00:51
+Attempting to locate the Roblox window 00:56
+Attempting to locate the Roblox window 01:02
+Attempting to locate the Roblox window 01:07
+Could not find Roblox window 01:08
