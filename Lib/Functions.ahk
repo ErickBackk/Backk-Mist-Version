@@ -23,7 +23,7 @@ readInSettings() {
         if !FileExist(settingsFile) {
             return
         }
-
+;a
         content := FileRead(settingsFile)
         lines := StrSplit(content, "`n")
         
