@@ -4,6 +4,16 @@
 
 global macroStartTime := A_TickCount
 global stageStartTime := A_TickCount
+global points := []
+
+global airplace := false
+global isair := false
+
+global searchArea := [0, 0, A_ScreenWidth, A_ScreenHeight]
+
+global greenfoundx := 0
+global greenfoundy := 0
+global hasCheckedStandardLoad := false
 
 
 
@@ -42,7 +52,6 @@ PlacingUnits() {
         return MonitorStage()
     }
 
-    placementPoints := GenerateCirclePoints()
     
     ; Go through each slot
     for slotNum in [1, 2, 3, 4, 5, 6] {
@@ -55,20 +64,44 @@ PlacingUnits() {
         placements := %placements%
         placements := Integer(placements.Text)
         
+        if !(enabled = 1) {
+            continue
+        }
+
         ; Initialize count if not exists
         if !placedCounts.Has(slotNum)
             placedCounts[slotNum] := 0
         
+        ;placementPoints := GenerateGridPoints()
+
+        steps := 30
+
         ; If enabled, place all units for this slot
         if (enabled && placements > 0) {
             ProcessLog("Placing Unit " slotNum " (0/" placements ")")
-            
+
             ; Place all units for this slot
-            while (placedCounts[slotNum] < placements) {
-                for point in placementPoints {
+        }
+
+        occupiedPoints := Map() ; Dicionário para armazenar pontos ocupados
+
+        while (placedCounts[slotNum] < placements) {
+
+            placementPoints := PlacementPatternDropdown.Text = "Circle" ? GenerateCirclePoints() : 
+            PlacementPatternDropdown.Text = "Grid" ? GenerateGridPoints() :
+            GenerateRandomGridPoints()
+
+            for point in placementPoints{
+                alreadyplace := point.x "," point.y
+            }
+
+            if (!occupiedPoints.Has(alreadyplace)){
+                for point in placementPoints {  
+
                     if PlaceUnit(point.x, point.y, slotNum) {
                         successfulCoordinates.Push({x: point.x, y: point.y, slot: slotNum})
                         placedCounts[slotNum] += 1
+                        occupiedPoints[alreadyplace] := true
                         ProcessLog("Placed Unit " slotNum " (" placedCounts[slotNum] "/" placements ")")
                         
                         CheckAbility()
@@ -79,10 +112,11 @@ PlacingUnits() {
                     if CheckForXp()
                         return MonitorStage()
                     Reconnect()
-                }
-                Sleep(500)
+                    }
             }
+            Sleep(500)
         }
+
     }
     
     ProcessLog("All units placed to requested amounts")
@@ -237,7 +271,6 @@ StoryMode() {
             PlayHere()
         }
     }
-
     RestartStage()
 }
 
@@ -266,6 +299,66 @@ LegendMode() {
     } else {
         PlayHere()
     }
+
+    RestartStage()
+}
+
+ContractMode() {
+    global ContractDropdown
+
+    currentContractTier := ContractDropdown.Text
+    ProcessLog("Starting " currentContractTier " Contract")
+    ContractClicks()
+
+    if (ContractDropdown.Text = "")
+        return
+
+    if (ContractDropdown.Text = "First")
+    {
+        Sleep(500)
+        FixClick(244, 410)
+        Sleep(500)
+    }
+    
+    if (ContractDropdown.Text = "Second")
+    {
+        Sleep(500)
+        FixClick(403, 410)
+        Sleep(500)
+    }
+
+    if (ContractDropdown.Text = "Third")
+    {
+        Sleep(500)
+        FixClick(561, 410)
+        Sleep(500)
+    }
+
+    if (ContractDropdown.Text = "Fourth")
+    {
+        Sleep(500)
+        Loop 3 {
+            Send "{WheelDown}"
+            Sleep 50
+        }
+        Sleep(500)
+        FixClick(311, 410)
+        Sleep(500)
+    }
+
+    if (ContractDropdown.Text = "Fifth")
+    {
+        Sleep(500)
+        Loop 3 {
+            Send "{WheelDown}"
+            Sleep 50
+        }
+        Sleep(500)
+        FixClick(468, 410)
+        Sleep(500)
+    }
+
+    FindMatch()
 
     RestartStage()
 }
@@ -521,6 +614,21 @@ MonitorEndScreen() {
                   return CheckLobby()
                 }   
             }
+        else if (mode = "Contracts") {
+                if (lastResult = "win") {
+                   ProcessLog("Contract completed successfully")
+                   FixClick(300, 117) ; Return to lobby
+                   FixClick(300, 117)
+                   FixClick(300, 117)
+                   return CheckLobby()
+                 } else {
+                   ProcessLog("Contract Failed")
+                   FixClick(300, 117)
+                   FixClick(300, 117)
+                   FixClick(300, 117)
+                   return CheckLobby()
+                 }   
+             }
         else {
                 if (ReturnLobbyBox.Value) { 
                 ProcessLog("Return to lobby enabled, returning to lobby")
@@ -555,14 +663,25 @@ MonitorStage() {
             timeElapsed := A_TickCount - lastClickTime
             if (timeElapsed >= 300000) {  ; 5 minutes
                 ProcessLog("Performing anti-AFK click")
+                SendInput ("{space down}")
+                Sleep(3000)
+                SendInput ("{space up}")
                 FixClick(560, 560)  ; Move click
                 lastClickTime := A_TickCount
             }
         }
 
-        if (ModeDropdown.Text = "Holiday Hunt" && successfulCoordinates.Length = 0) {
-            cardSelector()
+        if (ModeDropdown.Text = "Holiday Hunt" && successfulCoordinates.Length = 0){
+            for index, priority in priorityOrder {
+                if (ok := FindText(&cardX, &cardY, 209, 203, 652, 404, 0, 0, textCards.Get(priority))) {
+                cardSelector()
+                }
+            }
         }
+        
+        ;if (ModeDropdown.Text = "Holiday Hunt" && successfulCoordinates.Length = 0) {
+           ;cardSelector()
+        ;}
 
         ; Check for XP screen
         if CheckForXp() {
@@ -671,6 +790,13 @@ HolidayMovement() {
 	SendInput ("{a up}")
 	Sleep (1200)
 	FixClick(469, 340)
+}
+
+ContractClicks() {
+    FixClick(37, 410)
+    Sleep (1000)
+    FixClick(424, 330)
+    Sleep (1000)
 }
 
 StartStory(map, StoryActDropdown) {
@@ -813,10 +939,15 @@ FindMatch() {
             return StartSelectedMode()
         }
 
-        FixClick(400, 435)  ; Play Here or Find Match 
-        Sleep(300)
-        FixClick(460, 330)  ; Click Find Match
-        Sleep(300)
+        if (ModeDropdown.Text = "Contracts")
+        {}
+        else
+        {
+            FixClick(400, 435)  ; Play Here or Find Match 
+            Sleep(300)
+            FixClick(460, 330)  ; Click Find Match
+            Sleep(300)
+        }
         
         ; Try captcha    
         if (!CaptchaDetect(252, 292, 300, 50, 400, 335)) {
@@ -890,9 +1021,10 @@ GetLegendActDownArrows(LegendActDropdown) {
 
 GetRaidDownArrows(map) {
     switch map {
-        case "Sacred Planet": return 1
-        case "Strange Town": return 2
-        case "Ruined City": return 3
+        case "Ant Kingdom": return 1
+        case "Sacred Planet": return 2
+        case "Strange Town": return 3
+        case "Ruined City": return 4
     }
 }
 
@@ -940,7 +1072,7 @@ TpSpawn() {
         SendInput("{WheelDown 1}") ;scroll
     }
     Sleep 300
-    FixClick(520, 270) ;Tp spawn
+    FixClick(525, 325) ;Tp spawn
     Sleep 300
     FixClick(583, 147)
     Sleep 300
@@ -963,6 +1095,7 @@ BasicSetup() {
     Zoom()
     Sleep 300
     TpSpawn()
+    CloseChat()
 }
 
 DetectMap() {
@@ -1183,24 +1316,59 @@ MoveForHolidayHunt() {
 }
 
 
-    
+
+;x158 y95 w59 h25
+
 RestartStage() {
+    global hasCheckedStandardLoad
     currentMap := DetectMap()
-    
-    ; Wait for loading
+
+    x1 := searchArea[1], y1 := searchArea[2], x2 := searchArea[3], y2 := searchArea[4]
+
+    ; Wait for loading and changes the hasCheckedStandadLoad status
     CheckLoaded()
 
-    ; Do initial setup and map-specific movement during vote timer
+    Sleep(2000)
+    if(hasCheckedStandardLoad == false){
+        sleep(10000)
+        ProcessLog('Loading took too long')
+        ProcessLog('Starting Setup')
+        connectStage(currentMap, hasCheckedStandardLoad)
+        return
+    }
+
+    try{
+        ;if loaded correctly, will setup the macro
+        connectStage(currentMap, hasCheckedStandardLoad)
+    } catch Error as e{
+        ProcessLog("Error Log: " e)
+    }
+
+    ;go back to the default value
+    hasCheckedStandardLoad := false
+}
+
+connectStage(cmap,status){
+    currentMap := cmap ;currentmap
+    loadStatus := status 
+
     BasicSetup()
+
     if (currentMap != "no map found") {
         HandleMapMovement(currentMap)
     }
 
     ; Wait for game to actually start
-    StartedGame()
+    if(loadStatus == true){
+        StartedGame()
+    }else{
+        ;
+        ProcessLog("Game started")
+        global stageStartTime := A_TickCount
+    }
 
     if (ModeDropdown.Text = "Holiday Hunt") {
-	MoveForHolidayHunt()
+	    MoveForHolidayHunt()
     }
 
     ; Begin unit placement and management
@@ -1209,6 +1377,7 @@ RestartStage() {
     ; Monitor stage progress
     MonitorStage()
 }
+
 
 Reconnect() {   
     ; Check for Disconnected Screen using FindText
@@ -1257,6 +1426,12 @@ PlaceUnit(x, y, slot := 1) {
     FixClick(x, y)
     Sleep 50
     SendInput("q")
+
+    if (FindText(&cardX, &cardY, 209, 203, 652, 404, 0, 0, pick_card)){
+        SendInput("q")
+        cardSelector()
+        Sleep(8000)
+    }
     
     if UnitPlaced() {
         Sleep 15
@@ -1334,16 +1509,20 @@ CheckLobby() {
 }
 
 CheckLoaded() {
+    global hasCheckedStandardLoad
     loop {
-        Sleep(1000)
-        
         ; Check for vote screen
         if (ok := FindText(&X, &Y, 326, 60, 547, 173, 0, 0, VoteStart)) {
             ProcessLog("Successfully Loaded In")
             Sleep(1000)
+            hasCheckedStandardLoad := true
+            break
+        }else if(ok:=FindText(&X, &Y, 156, 99, 217, 120, 0, 0, WaveText)){
+            ;if theres no vote screen, detects the "wave" text
+            hasCheckedStandardLoad := false
             break
         }
-
+        ; reconects if it's a roblox error
         Reconnect()
     }
 }
@@ -1357,7 +1536,7 @@ StartedGame() {
             FixClick(350, 97)
             continue  ; Keep waiting if vote screen is still there
         }
-        
+
         ; If we don't see vote screen anymore the game has started
         ProcessLog("Game started")
         global stageStartTime := A_TickCount
@@ -1367,18 +1546,21 @@ StartedGame() {
 
 ; circle coordinates
 GenerateCirclePoints() {
-    points := []
     
     ; Define each circle's radius
-    radius1 := 45    ; First circle 
-    radius2 := 90    ; Second circle 
-    radius3 := 135   ; Third circle 
-    radius4 := 180   ; Fourth circle 
+    radius1 := 90    ; First circle 
+    radius2 := 45    ; Second circle 
+    radius3 := 180   ; Third circle 
+    radius4 := 135   ; Fourth circle 
     
+    ;local centerX := 408
+    ;local centerY := 320
+
     ; Angles for 8 evenly spaced points (in degrees)
     angles := [0, 45, 90, 135, 180, 225, 270, 315]
-    
-    ; First circle points
+
+        ; First circle points
+
     for angle in angles {
         radians := angle * 3.14159 / 180
         x := centerX + radius1 * Cos(radians)
@@ -1408,6 +1590,65 @@ GenerateCirclePoints() {
         x := centerX + radius4 * Cos(radians)
         y := centerY + radius4 * Sin(radians)
         points.Push({ x: Round(x), y: Round(y) })
+    }
+    
+    return points
+}
+
+global step := 50
+
+GenerateGridPoints(){
+
+    points := []
+    gridSize := 40  ; Space between points
+    squaresPerSide := 5  ; How many points per row/column (odd number recommended)
+    
+    ; Center point coordinates
+    ;;centerX := 408
+    ;;centerY := 320
+    
+    ; Calculate starting position for top-left point of the grid
+    startX := centerX - ((squaresPerSide - 1) / 2 * gridSize)
+    startY := centerY - ((squaresPerSide - 1) / 2 * gridSize)
+    
+    ; Generate grid points row by row
+    Loop squaresPerSide {
+        currentRow := A_Index
+        y := startY + ((currentRow - 1) * gridSize)
+        
+        ; Generate each point in the current row
+        Loop squaresPerSide {
+            x := startX + ((A_Index - 1) * gridSize)
+            points.Push({x: x, y: y})
+        }
+    }
+    
+    return points
+
+}
+
+GenerateRandomGridPoints() {
+    points := []
+    gridSize := 80 ; Espaço entre pontos
+    squaresPerSide := 5 ; Quantidade de pontos por linha/coluna
+    
+    ; Ponto central da grade
+    ;centerX := 408
+    ;centerY := 320
+    
+    ; Calcula a posição inicial do canto superior esquerdo da grade
+    startX := centerX - ((squaresPerSide - 1) / 2 * gridSize)
+    startY := centerY - ((squaresPerSide - 1) / 2 * gridSize)
+    
+    ; Gera os pontos na grid com variação aleatória dentro do espaço da célula
+    Loop squaresPerSide {
+        row := A_Index
+        Loop squaresPerSide {
+            col := A_Index
+            x := startX + ((col - 1) * gridSize) + (Random(-gridSize / 2, gridSize / 2))
+            y := startY + ((row - 1) * gridSize) + (Random(-gridSize / 2, gridSize / 2))
+            points.Push({x: x, y: y})
+        }
     }
     
     return points
@@ -1450,6 +1691,9 @@ StartSelectedMode() {
     }
     else if (ModeDropdown.Text = "Holiday Hunt") {
         HolidayHuntMode()
+    }
+    else if (ModeDropdown.Text = "Contracts") {
+        ContractMode()
     }
 }
 

@@ -5,6 +5,10 @@ global Discord := "Images\discord_logo.png"
 global Minimize := "Images\minimizeButton.png" 
 global Exitbutton := "Images\exitButton.png"
 global Fukki := "Images\FukkiReta.gif"
+global SettingsImg := "Images\settings.png"
+global HelpImg := "Images\helpbutton.png"
+global SaveImg := "Images\diskette.png"
+global CheckImg := "Images\checkmark.png"
 
 ;Explaining FindText
 ;AreaText is the area button in the lobby  / 746, 514, 789, 530
@@ -22,6 +26,7 @@ global Fukki := "Images\FukkiReta.gif"
 
 
 ;FindText Text and Buttons
+WaveText:= "|<>*127$57.zzzzzzzzzwT7lzzzzzz3ky7zzzzzwC3VzzzzzzVkQDzzzzzwA3VsX7ts7kU8Q00y60C413013kU1k20M08QACD0E73VVVVls20swA8Q0D0sD31k7U3w71s0D0wDzVsDU1sDU1yDXw0DVy0DnwTsXwTs3zzzzzzzzzw"
 AreaText:="|<>*109$36.szzzzzszyzzzkM8A27mM842LU8k0W7U8k8X770sA07DZwC27zzzzzzzzzzzzU"
 ModeCancel:="|<>*134$70.zzzzzzzzzzzzzzzzzzzzzzzzwDzzzzzzzszz0DzzzzzzzXzs0TzzzzzzyDz01zzzzzzzszsDDzzzznz7XzVzw0k3w3k6DyDzU307U60Mzszw0A0A0kEXzXzkkkkkz72DyDz737X7w08zsTwQASATk1XzkMk0lsk33y7z01037X040MDy060ASC0M1Uzy1y8lsy7k73zzzzzzzzzzzzU"
 UpgradeText:="|<>*88$69.zzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzDnzzzzzzwTzswTzzzzzzXzz7XzzzzzzwTzswTzzTjzzXtz7X0w10k70Q3swM30840k30D7X48V7W68MlswMkC9ssXW0D7360VD36AE3s0s309w0k37TU70Q1DU70M3y3sDm9z0w3UTzzDxlzzzzzzzztz0TzzzzzzzzDw7zzzzzzzztzvzzzzzzw"

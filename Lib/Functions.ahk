@@ -23,7 +23,7 @@ readInSettings() {
         if !FileExist(settingsFile) {
             return
         }
-;a
+
         content := FileRead(settingsFile)
         lines := StrSplit(content, "`n")
         
@@ -212,6 +212,13 @@ SaveUINavSettings(*) {
 }
 
 ;Opens discord Link
+OpenDiscordLink() {
+    Run("https://discord.gg/mistdomain")
+ }
+
+ OpenFukkiReta(){
+    Run("https://www.youtube.com/watch?v=TWdfNakkBFM")
+ }
  
  ;Minimizes the UI
  minimizeUI(*){
@@ -251,6 +258,7 @@ SaveUINavSettings(*) {
     RaidDropdown.Visible := false
     RaidActDropdown.Visible := false
     InfinityCastleDropdown.Visible := false
+    ContractDropdown.Visible := false
     MatchMaking.Visible := false
     ReturnLobbyBox.Visible := false
     
@@ -272,6 +280,9 @@ SaveUINavSettings(*) {
     } else if (selected = "Cursed Womb") {
         InfinityCastleDropdown.Visible := true
         mode := "Cursed Womb"
+    } else if (selected = "Contracts"){
+        ContractDropdown.Visible := true
+        mode := "Contracts"
     }
 }
 
@@ -296,6 +307,14 @@ OnRaidChange(*) {
         RaidActDropdown.Visible := true
     } else {
         RaidActDropdown.Visible := false
+    }
+}
+
+OnContractChange(*) {
+    if (ContractDropdown.Text != "") {
+        ContractDropdown.Visible := true
+    } else {
+        ContractDropdown.Visible := false
     }
 }
 
@@ -336,6 +355,15 @@ OnConfirmClick(*) {
         MatchMaking.Visible := true
         ReturnLobbyBox.Visible := true
     }
+    else if (ModeDropdown.Text = "Contracts"){
+        if (ContractDropdown.Text = "") {
+            ProcessLog("Please select an Contract number first")
+            return
+        }
+        ProcessLog("Selected " ContractDropdown.Text " Contract ")
+        MatchMaking.Visible := true
+        ReturnLobbyBox.Visible := true
+    }
     else {
         ProcessLog("Selected " ModeDropdown.Text " mode")
         MatchMaking.Visible := false
@@ -353,6 +381,7 @@ OnConfirmClick(*) {
     RaidDropdown.Visible := false
     RaidActDropdown.Visible := false
     InfinityCastleDropdown.Visible := false
+    ContractDropdown.Visible := false
     ConfirmButton.Visible := false
     modeSelectionGroup.Visible := false
     Hotkeytext.Visible := true
@@ -368,7 +397,7 @@ FixClick(x, y, LR := "Left") {
     MouseClick(LR, -1, 0, , , , "R")
     Sleep(50)
 }
- 
+
 CaptchaDetect(x, y, w, h, inputX, inputY) {
     detectionCount := 0
     ProcessLog("Checking for numbers...")

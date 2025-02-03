@@ -34,6 +34,6 @@ global textCards := Map(
     "Range Buff", range,
     "Attack Buff", attack,
     "Cooldown Buff", cooldown,
-    "Shield Buff", shield,
+    "Shield Debuff", shield,
     "Yen Buff", yen
 )
